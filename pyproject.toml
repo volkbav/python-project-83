@@ -1,0 +1,10 @@
+[project]
+authors = [
+    {name = "Aleksandr Berezov", email = "berezov86@gmail.com"},
+]
+name = "hexlet-code"
+version = "0.1.0"
+description = "Study project - page analizator"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
