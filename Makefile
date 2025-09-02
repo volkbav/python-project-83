@@ -16,7 +16,7 @@ fix_lint:
 	uv run ruff check --fix .
 
 build:
-	./build.sh
+    ./build.sh
 
 render-start:
 	gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
