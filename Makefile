@@ -9,4 +9,10 @@ dev:
 start:
 	uv run gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
 
-.PHONY: install dev start
+lint:
+	uv run ruff check .
+
+fix_lint:
+	uv run ruff check --fix .
+
+.PHONY: install dev start lint fix_lint
