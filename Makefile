@@ -15,4 +15,7 @@ lint:
 fix_lint:
 	uv run ruff check --fix .
 
-.PHONY: install dev start lint fix_lint
+build:
+	./build.sh
+
+.PHONY: install dev start lint fix_lint build
