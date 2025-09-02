@@ -4,7 +4,9 @@ authors = [
 ]
 name = "hexlet-code"
 version = "0.1.0"
-description = "Study project - page analizator"
+description = "Study project - page analizer"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "flask>=3.1.2",
+]
