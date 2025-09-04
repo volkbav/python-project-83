@@ -9,6 +9,7 @@ if "localhost" in DATABASE_URL:
 else:
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
+
 class UrlRepository:
     def __init__(self, conn):
         self.conn = conn
