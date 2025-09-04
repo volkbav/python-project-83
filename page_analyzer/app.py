@@ -1,8 +1,9 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, url_for, flash
-from .repository import conn, UrlRepository
+from flask import Flask, flash, redirect, render_template, request
+
+from .repository import UrlRepository, conn
 
 load_dotenv()
 app = Flask(__name__)
@@ -18,6 +19,7 @@ def index():
         url={"name": ""},
         errors={}
     )
+
 
 @app.post("/")
 def urls_add():
@@ -41,6 +43,7 @@ def urls_add():
     # --- to delete
     return redirect("/urls", code=302) 
 
+
 @app.route("/urls")
 def urls_index():
     urls = repo.get_all()
@@ -50,8 +53,8 @@ def urls_index():
         urls=urls,
     )
 
+
 @app.route("/urls/<int:id>")
 def urls_show(id):
-    url = repo.find(id)
     pass
 
