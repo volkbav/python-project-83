@@ -4,10 +4,7 @@ import psycopg2
 from psycopg2.extras import DictCursor
 
 DATABASE_URL = os.getenv('DATABASE_URL')
-if "localhost" in DATABASE_URL:
-    conn = psycopg2.connect(DATABASE_URL)
-else:
-    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
+conn = psycopg2.connect(DATABASE_URL)
 
 
 class UrlRepository:
