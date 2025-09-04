@@ -51,3 +51,9 @@ class UrlRepository:
         with self.conn.cursor() as cur:
             cur.execute("DELETE FROM urls WHERE id = %s", (id,))
         self.conn.commit()
+
+    def save(self, url):
+        if "id" in url and url["id"]:
+            self._update(url)
+        else:
+            self._create(url)

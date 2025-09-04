@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
-    <p></p>
-  <div class="card text-center mb-3 mx-auto p-2 bg-light" style="width: 25rem;">
+<!--
+ Здесь должна открываться плашка с ошибкой.
+ Пока что обработчика ошибок нет!!!
+-->
+ 
+  {% if errors['name'] %}
+    <div class="alert alert-dark" role="alert">
+      {{ errors['name'] }}
+    </div>
+  {% endif %}
+  <p></p>
+  <div class="card text-start mb-3 mx-auto p-2 bg-light" style="width: 29rem;">
     <div class="card-body">
-      <h5 class="card-title">Анализатор страниц</h5>
+      <h1 class="card-title">Анализатор страниц</h1>
       <p class="card-text">Бесплатно проверяйте сайты на SEO-пригодность</p>
-      <form action="/" method="POST" class="d-flex justify-content-center"></form>
+      <form action="/" method="POST" class="d-flex justify-content-left">
+        <div>
+          <lable>
+            <input type="text" name="name" value="{{ url.name }}">
+            <input type="submit" value="ПРОВЕРИТЬ">
+          </lable>         
+        </div>
+      </form>
     </div>
   </div>
 </main>
