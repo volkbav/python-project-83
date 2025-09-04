@@ -50,3 +50,8 @@ def urls_index():
         urls=urls,
     )
 
+@app.route("/urls/<int:id>")
+def urls_show(id):
+    url = repo.find(id)
+    pass
+
