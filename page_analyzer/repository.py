@@ -7,7 +7,7 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 if "localhost" in DATABASE_URL:
     conn = psycopg2.connect(DATABASE_URL)
 else:
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    conn = psycopg2.connect(DATABASE_URL, sslmode='prefer')
 
 
 class UrlRepository:
