@@ -24,7 +24,7 @@ def index():
 @app.post("/")
 def urls_add():
     url = {
-        "name": request.form.get("name", "")
+        "name": request.form.get("url", "")
     }
     errors = repo.validate(url)
     if errors:
@@ -56,5 +56,7 @@ def urls_index():
 
 @app.route("/urls/<int:id>")
 def urls_show(id):
-    pass
+    return render_template(
+        "urls/show_url.html"
+    )
 

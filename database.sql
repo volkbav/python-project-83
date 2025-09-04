@@ -3,3 +3,10 @@ CREATE TABLE IF NOT EXISTS urls (
     name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP
 );
+CREATE TABLE IF NOT EXISTS url (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    header VARCHAR(255),
+    title VARCHAR(255),
+    descriptions TEXT,
+    created_at TIMESTAMP
+);
