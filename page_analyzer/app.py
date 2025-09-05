@@ -1,3 +1,6 @@
+"""
+1. нет надписи в форме "http://www.example.com"
+"""
 import os
 
 from dotenv import load_dotenv
