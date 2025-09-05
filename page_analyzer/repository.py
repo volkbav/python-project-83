@@ -10,20 +10,6 @@ conn = psycopg2.connect(DATABASE_URL)
 class UrlRepository:
     def __init__(self, conn):
         self.conn = conn
-        self._init_schema()
-
-    def _init_schema(self):
-        sql_path = os.path.join(os.path.dirname(__file__), "..", "database.sql")
-        with open(sql_path, "r") as f:
-            sql = f.read()
-
-        # Разделяем на отдельные запросы по точке с запятой
-        statements = [s.strip() for s in sql.split(";") if s.strip()]
-
-        with self.conn:
-            with self.conn.cursor() as cur:
-                for stmt in statements:
-                    cur.execute(stmt)
 
     def get_content(self):
         with self.conn.cursor(cursor_factory=DictCursor) as cur:
