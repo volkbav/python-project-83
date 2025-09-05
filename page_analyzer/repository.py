@@ -3,13 +3,12 @@ import os
 import psycopg2
 from psycopg2.extras import DictCursor
 
-"""
-1. Необходимо исправить ошибку в сохранении: 
-нужно сохрнанять нормализованную ссылку (импорт
-из модуля validator функции normilize_url)
+from .validator import normilize_url
 
+"""
 2. БД закрывается до выполнения запроса - 
 нужно создать соединение перед каждым запросом
+
 """
 
 DATABASE_URL = os.getenv('DATABASE_URL')
@@ -26,11 +25,12 @@ class UrlRepository:
             return [dict(row) for row in cur]
         
     def _create(self, url):
+        normilized_url = normilize_url(url['name'])
         with self.conn.cursor() as cur:
             cur.execute(
                 """INSERT INTO urls (name, created_at) 
                 VALUES (%s, NOW()) RETURNING id""",
-                (url["name"],),
+                (normilized_url,),
             )
             id = cur.fetchone()[0]
             url["id"] = id
