@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request
 
 from .repository import UrlRepository, conn
+from .validator import url_validate
 
 load_dotenv()
 app = Flask(__name__)
@@ -16,7 +17,7 @@ repo = UrlRepository(conn)
 def index():
     return render_template(
         "index.html", 
-        url={"name": ""},
+        url={'name': ''},
         errors={}
     )
 
@@ -24,15 +25,16 @@ def index():
 @app.post("/")
 def urls_add():
     url = {
-        "name": request.form.get("url", "")
+        'name': request.form.get("url", "")
     }
-    errors = repo.validate(url)
+    errors = url_validate(url["name"])
     if errors:
         return render_template(
-            "/",
+            "index.html",
             url=url,
             errors=errors,
         ), 422
+    
     repo.save(url)
     flash("Страница успешно добавлена", "success")
     # --- to delete

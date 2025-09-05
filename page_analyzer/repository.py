@@ -3,6 +3,12 @@ import os
 import psycopg2
 from psycopg2.extras import DictCursor
 
+"""
+Необходимо исправить ошибку в сохранении: 
+нужно сохрнанять нормализованную ссылку (импорт
+из модуля validator функции normilize_url)
+"""
+
 DATABASE_URL = os.getenv('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL)
 
@@ -16,9 +22,6 @@ class UrlRepository:
             cur.execute("SELECT * FROM urls")
             return [dict(row) for row in cur]
         
-    def validate(self, data, current_id=None):
-        pass
-
     def _create(self, url):
         with self.conn.cursor() as cur:
             cur.execute(
