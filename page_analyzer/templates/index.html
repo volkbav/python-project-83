@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
-<!--
- Здесь должна открываться плашка с ошибкой.
- Пока что обработчика ошибок нет!!!
--->
- 
   {% if errors['name'] %}
     <div class="alert alert-danger" role="alert">
       {{ errors['name'] }}
