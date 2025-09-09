@@ -5,8 +5,9 @@ CREATE TABLE IF NOT EXISTS urls (
 );
 CREATE TABLE IF NOT EXISTS url (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    header VARCHAR(255),
-    title VARCHAR(255),
+    code_request BIGINT,
+    h1 TEXT,
+    title TEXT,
     descriptions TEXT,
     created_at TIMESTAMP
 );
