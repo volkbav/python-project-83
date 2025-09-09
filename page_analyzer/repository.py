@@ -5,12 +5,6 @@ from psycopg2.extras import DictCursor
 
 from .validator import normilize_url
 
-"""
-2. БД закрывается до выполнения запроса - 
-нужно создать соединение перед каждым запросом
-
-"""
-
 DATABASE_URL = os.getenv('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL)
 
