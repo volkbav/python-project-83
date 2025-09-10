@@ -9,7 +9,8 @@ class UrlRepository:
         self.database_url = database_url
 
     def get_content(self):
-        query = "SELECT * FROM urls"
+        query = """SELECT * FROM urls
+            ORDER BY id DESC"""
         
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory=DictCursor) as cur:
@@ -18,12 +19,13 @@ class UrlRepository:
         
     def _create(self, url):
         normilized_url = normilize_url(url['name'])
-        
+        query = """INSERT INTO urls (name, created_at) 
+            VALUES (%s, NOW()) RETURNING id"""
+
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    """INSERT INTO urls (name, created_at) 
-                    VALUES (%s, NOW()) RETURNING id""",
+                    query,
                     (normilized_url,),
                 )
                 id = cur.fetchone()[0]
