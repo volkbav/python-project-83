@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, flash, redirect, render_template, request
+from flask import Flask, flash, redirect, render_template, request, url_for
 
 from .repository import UrlRepository
 from .validator import url_validate
@@ -40,13 +40,8 @@ def urls_add():
     
     repo.save(url)
     flash("Страница успешно добавлена", "success")
-    # --- to delete
-    """
-    неправильный redirect - нужно направить на "/urls/<id>" через url_for. 
-    Но пока нет этого обработчика...
-    """
-    # --- to delete
-    return redirect("/urls", code=302) 
+   
+    return redirect(url_for('urls_show', id=url["id"]), code=302) 
 
 
 @app.route("/urls")
