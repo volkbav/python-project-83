@@ -41,6 +41,15 @@ class UrlRepository:
                 row = cur.fetchone()
                 return dict(row) if row else None
     
+    def find_by_id(self, id):
+        query = "SELECT * FROM urls WHERE id = %s"
+
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cur:
+                cur.execute(query, (id,))
+                row = cur.fetchone()
+                return dict(row) if row else None
+    
     def get_all(self):
         return self.get_content()
     

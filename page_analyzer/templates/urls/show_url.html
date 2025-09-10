@@ -1,6 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
-    uuups
-</main>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <div class="container-lg mt-3">
+    <h1>
+        Сайт: {{ url.name }}
+    </h1>
+     <table class="table table-bordered" data-test="urls">
+      <tbody>
+          <tr>
+            <td>ID</td>
+            <td>{{ url.id }}</td>
+          </tr>
+          <tr>
+            <td>Имя</td>
+            <td>{{ url.name }}</td>
+          </tr>
+          <tr>
+            <td>Дата создания</td>
+            <td>{{ url.created_at.strftime("%Y-%m-%d") }}</td>
+          </tr>
+      </tbody>
+    </table>
+    <h2 class="mt-5 mb-3">
+        Проверки
+    </h2>
+    <!-- обработчик еще не написан!!! "action" необходимо изменить
+     и написать через url_for -->
+    <form method="post" action="/urls/1/checks">
+      <input type="submit" class="btn btn-primary" value="Запустить проверку">
+    </form>
+    
+  <div>
+    <table class="table table-bordered table-hover mt-2" data-test="checks">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Код ответа</th>
+          <th>h1</th>
+          <th>title</th>
+          <th>description</th>
+          <th>Дата создания</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for url in urls %}
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
 {% endblock %}
+</main>

@@ -56,7 +56,9 @@ def urls_index():
 
 @app.route("/urls/<int:id>")
 def urls_show(id):
+    url = repo.find_by_id(id)
     return render_template(
-        "urls/show_url.html"
+        "urls/show_url.html",
+        url=url
     )
 
