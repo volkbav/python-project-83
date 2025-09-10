@@ -1,12 +1,6 @@
-import os
-
-import psycopg2
 from psycopg2.extras import DictCursor
 
 from .validator import normilize_url
-
-DATABASE_URL = os.getenv('DATABASE_URL')
-conn = psycopg2.connect(DATABASE_URL)
 
 
 class UrlRepository:
