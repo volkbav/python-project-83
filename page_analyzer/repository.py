@@ -33,21 +33,17 @@ class UrlRepository:
             conn.commit()
 
     def find_by_name(self, name):
+        query = "SELECT * FROM urls WHERE name = %s"
+
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory=DictCursor) as cur:
-                cur.execute("SELECT * FROM urls WHERE name = %s", (name,))
+                cur.execute(query, (name,))
                 row = cur.fetchone()
                 return dict(row) if row else None
     
     def get_all(self):
         return self.get_content()
     
-    def delete(self, id):
-        with psycopg2.connect(self.database_url) as conn:
-            with conn.cursor() as cur:
-                cur.execute("DELETE FROM urls WHERE id = %s", (id,))
-            conn.commit()
-
     def save(self, url):
         normilized_url = normilize_url(url['name'])
         exist_name = self.find_by_name(normilized_url)
