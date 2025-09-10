@@ -1,6 +1,5 @@
 import os
 
-import psycopg2
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request
 
@@ -14,8 +13,7 @@ app = Flask(__name__)
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
-conn = psycopg2.connect(DATABASE_URL)
-repo = UrlRepository(conn)
+repo = UrlRepository(DATABASE_URL)
 
 
 @app.get("/") 
