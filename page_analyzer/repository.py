@@ -9,9 +9,11 @@ class UrlRepository:
         self.database_url = database_url
 
     def get_content(self):
+        query = "SELECT * FROM urls"
+        
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory=DictCursor) as cur:
-                cur.execute("SELECT * FROM urls")
+                cur.execute(query)
                 return [dict(row) for row in cur]
         
     def _create(self, url):
@@ -28,22 +30,13 @@ class UrlRepository:
                 url["id"] = id
             conn.commit()
 
-    def find(self, id):
+    def find_by_name(self, name):
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory=DictCursor) as cur:
-                cur.execute("SELECT * FROM urls WHERE id = %s", (id,))
+                cur.execute("SELECT * FROM urls WHERE name = %s", (name,))
                 row = cur.fetchone()
                 return dict(row) if row else None
     
-    def _update(self, url):
-        with psycopg2.connect(self.database_url) as conn:
-            with conn.cursor() as cur:
-                cur.execute(
-                    "UPDATE urls SET name = %s WHERE id = %s",
-                    (url["name"], url["id"]),
-                )
-            conn.commit()
-
     def get_all(self):
         return self.get_content()
     
@@ -54,7 +47,13 @@ class UrlRepository:
             conn.commit()
 
     def save(self, url):
-        if "id" in url and url["id"]:
-            self._update(url)
+        normilized_url = normilize_url(url['name'])
+        exist_name = self.find_by_name(normilized_url)
+        if exist_name:
+            url['id'] = exist_name['id']
+            return exist_name
         else:
             self._create(url)
+            return url
+
+    
