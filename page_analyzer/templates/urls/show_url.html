@@ -35,7 +35,7 @@
     </h2>
     <!-- обработчик еще не написан!!! "action" необходимо изменить
      и написать через url_for -->
-    <form method="post" action="/urls/1/checks">
+    <form action="{{ url_for('url_check', id=url.id) }}" method="post">
       <input type="submit" class="btn btn-primary" value="Запустить проверку">
     </form>
     

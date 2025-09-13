@@ -8,8 +8,8 @@ class UrlRepository:
     def __init__(self, database_url):
         self.database_url = database_url
 
-    def get_content(self):
-        query = """SELECT * FROM urls
+    def get_content(self, table):
+        query = f"""SELECT * FROM {table}
             ORDER BY id DESC"""
         
         with psycopg2.connect(self.database_url) as conn:
@@ -50,8 +50,8 @@ class UrlRepository:
                 row = cur.fetchone()
                 return dict(row) if row else None
     
-    def get_all(self):
-        return self.get_content()
+    def get_all_urls(self):
+        return self.get_content('urls')
     
     def save(self, url):
         normilized_url = normilize_url(url['name'])
@@ -63,4 +63,31 @@ class UrlRepository:
             self._create(url)
             return url
 
-    
+    def check_url_save(self, data):
+        
+        query = """INSERT INTO  url_checks 
+                    (url_id,
+                    status_code,
+                    h1,
+                    title,
+                    description,
+                    created_at) 
+                VALUES (%s, %s, %s, %s, %s, NOW())
+                RETURNING id"""
+
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    query,
+                    (
+                        data['url_id'],
+                        data['status_code'],
+                        data['h1'],
+                        data['title'],
+                        data['description'], 
+                    ),
+                )
+            conn.commit()
+
+    def get_all_checks(self):
+        return self.get_content('url_checks')

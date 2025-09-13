@@ -46,7 +46,7 @@ def urls_add():
 
 @app.route("/urls")
 def urls_index():
-    urls = repo.get_all()
+    urls = repo.get_all_urls()
 
     return render_template(
         "urls/index.html",
@@ -62,3 +62,21 @@ def urls_show(id):
         url=url
     )
 
+@app.route('/urls/<int:id>/checks', methods=['POST'])
+def url_check(id):
+
+    status_code = None
+    h1 = None
+    title = None
+    description = None
+    
+    data = {
+        'url_id': id,
+        'status_code': status_code,
+        'h1': h1,
+        'title': title,
+        'description': description
+    }
+
+    repo.check_url_save(data)
+    return redirect(url_for('urls_show', id=id), code=302)
