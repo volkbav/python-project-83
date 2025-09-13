@@ -3,11 +3,13 @@ CREATE TABLE IF NOT EXISTS urls (
     name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP
 );
-CREATE TABLE IF NOT EXISTS url (
+CREATE TABLE IF NOT EXISTS url_checks (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    code_request BIGINT,
+    url_id BIGINT
+        REFERENCES urls(id),
+    status_code BIGINT,
     h1 TEXT,
     title TEXT,
-    descriptions TEXT,
+    description TEXT,
     created_at TIMESTAMP
 );
