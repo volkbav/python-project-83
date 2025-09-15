@@ -56,12 +56,13 @@ class UrlRepository:
     def save(self, url):
         normilized_url = normilize_url(url['name'])
         exist_name = self.find_by_name(normilized_url)
+# тут из функции возвращаю тип flash
         if exist_name:
             url['id'] = exist_name['id']
-            return exist_name
+            return "exist"
         else:
             self._create(url)
-            return url
+            return "success"
 
     def check_url_save(self, data):
         
