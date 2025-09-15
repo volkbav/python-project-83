@@ -8,15 +8,6 @@ class UrlRepository:
     def __init__(self, database_url):
         self.database_url = database_url
 
-    def get_content(self, table):
-        query = f"""SELECT * FROM {table}
-            ORDER BY id DESC"""
-        
-        with psycopg2.connect(self.database_url) as conn:
-            with conn.cursor(cursor_factory=DictCursor) as cur:
-                cur.execute(query)
-                return [dict(row) for row in cur]
-        
     def _create(self, url):
         normilized_url = normilize_url(url['name'])
         query = """INSERT INTO urls (name, created_at) 
@@ -51,7 +42,14 @@ class UrlRepository:
                 return dict(row) if row else None
     
     def get_all_urls(self):
-        return self.get_content('urls')
+        query = f"""SELECT * FROM urls
+            ORDER BY id DESC"""
+        
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cur:
+                cur.execute(query)
+                return [dict(row) for row in cur]
+
     
     def save(self, url):
         normilized_url = normilize_url(url['name'])
@@ -90,5 +88,14 @@ class UrlRepository:
                 )
             conn.commit()
 
-    def get_all_checks(self):
-        return self.get_content('url_checks')
+    def get_all_checks(self, url_id):
+        query = f"""SELECT * FROM url_checks
+            WHERE url_id=%s
+            ORDER BY id DESC
+            """
+        
+        with psycopg2.connect(self.database_url) as conn:
+            with conn.cursor(cursor_factory=DictCursor) as cur:
+                cur.execute(query, (url_id,))
+                return [dict(row) for row in cur]
+
