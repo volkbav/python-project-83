@@ -40,17 +40,24 @@ class UrlRepository:
                 cur.execute(query, (id,))
                 row = cur.fetchone()
                 return dict(row) if row else None
-    
+  
     def get_all_urls(self):
-        query = f"""SELECT * FROM urls
-            ORDER BY id DESC"""
+        query = """SELECT DISTINCT ON (u.id)
+                u.id,
+                u.name,
+                c.created_at,
+                c.status_code
+            FROM urls AS u
+            LEFT JOIN url_checks AS c 
+                ON c.url_id = u.id
+            ORDER BY u.id DESC
+            """
         
         with psycopg2.connect(self.database_url) as conn:
             with conn.cursor(cursor_factory=DictCursor) as cur:
                 cur.execute(query)
                 return [dict(row) for row in cur]
 
-    
     def save(self, url):
         normilized_url = normilize_url(url['name'])
         exist_name = self.find_by_name(normilized_url)
@@ -89,7 +96,7 @@ class UrlRepository:
             conn.commit()
 
     def get_all_checks(self, url_id):
-        query = f"""SELECT * FROM url_checks
+        query = """SELECT * FROM url_checks
             WHERE url_id=%s
             ORDER BY id DESC
             """

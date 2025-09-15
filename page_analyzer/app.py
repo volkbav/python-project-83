@@ -47,6 +47,7 @@ def urls_add():
    
     return redirect(url_for('urls_show', id=url["id"]), code=302) 
 
+
 # тут надо поправить вывод данных в таблицу
 @app.route("/urls")
 def urls_index():
@@ -56,7 +57,8 @@ def urls_index():
         "urls/index.html",
         urls=urls,
     )
-#---
+# ---
+
 
 @app.route("/urls/<int:id>")
 def urls_show(id):
