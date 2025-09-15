@@ -33,8 +33,6 @@
     <h2 class="mt-5 mb-3">
         Проверки
     </h2>
-    <!-- обработчик еще не написан!!! "action" необходимо изменить
-     и написать через url_for -->
     <form action="{{ url_for('url_check', id=url.id) }}" method="post">
       <input type="submit" class="btn btn-primary" value="Запустить проверку">
     </form>
