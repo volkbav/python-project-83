@@ -50,7 +50,7 @@ class UrlRepository:
             FROM urls AS u
             LEFT JOIN url_checks AS c 
                 ON c.url_id = u.id
-            ORDER BY u.id DESC
+            ORDER BY u.id DESC, c.created_at DESC
             """
         
         with psycopg2.connect(self.database_url) as conn:
