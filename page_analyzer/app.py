@@ -49,7 +49,6 @@ def urls_add():
     return redirect(url_for('urls_show', id=url["id"]), code=302) 
 
 
-# тут надо поправить вывод данных в таблицу
 @app.route("/urls")
 def urls_index():
     urls = repo.get_all_urls()
@@ -58,7 +57,6 @@ def urls_index():
         "urls/index.html",
         urls=urls,
     )
-# ---
 
 
 @app.route("/urls/<int:id>")
@@ -76,7 +74,7 @@ def urls_show(id):
 def url_check(id):
     url = repo.find_by_id(id)['name']
     response = get_response(url)
-    
+
     if response['is_ok']:
         data = {
             'url_id': id,
@@ -86,7 +84,9 @@ def url_check(id):
             'description': None
         }
         repo.check_url_save(data)
+        flash("Страница успешно проверена", "success")
     else:
         flash("Произошла ошибка при проверке", "danger")
-   
+    
     return redirect(url_for('urls_show', id=id), code=302)
+    

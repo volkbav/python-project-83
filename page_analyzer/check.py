@@ -4,14 +4,16 @@ import requests
 def get_response(url):
     try:
         response = requests.get(url, timeout=1)
-    except requests.exceptions.ReadTimeout:
-        result = {
-            'is_ok': None
-        }
-    else:
-        result = {
+        response.raise_for_status()
+
+        return {
             'status_code': response.status_code,
-            'is_ok': response.ok
+            'is_ok': True
         }
 
-    return result
+    except requests.exceptions.RequestException:
+        return {
+            'status_code': None,
+            'is_ok': False
+        }
+    
