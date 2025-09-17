@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
 
-from .check import get_response
+from .parser import get_response
 from .repository import UrlRepository
 from .validator import url_validate
 
