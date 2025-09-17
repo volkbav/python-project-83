@@ -1,7 +1,3 @@
-"""
-1. нет проверки, что данный сайт уже в БД
-
-"""
 from urllib.parse import urlparse
 
 
