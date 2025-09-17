@@ -46,7 +46,7 @@ def urls_add():
     elif flash_type == "exist":
         flash("Страница уже существует", "primary")
    
-    return redirect(url_for('urls_show', id=url["id"]), code=302) 
+    return redirect(url_for('urls_index'), code=302) 
 
 
 @app.route("/urls")
@@ -79,8 +79,7 @@ def url_check(id):
         repo.check_url_save(data)
         flash("Страница успешно проверена", "success")
     else:
-        code = data['status_code']
-        flash(f"Произошла ошибка при проверке (код ошибки {code})", "danger")
+        flash(f"Произошла ошибка при проверке", "danger")
     
     return redirect(url_for('urls_show', id=id), code=302)
     

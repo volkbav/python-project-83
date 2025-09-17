@@ -3,7 +3,7 @@
 <main>
   {% if errors['name'] %}
     <div class="alert alert-danger" role="alert">
-      {{ errors['name'] }}
+      {{ errors.name }}
     </div>
   {% endif %}
   <p></p>
@@ -13,9 +13,9 @@
       <p class="card-text">Бесплатно проверяйте сайты на SEO-пригодность</p>
       <form action="/" method="POST" class="d-flex justify-content-left">
         <div class="col-auto">
-          <lable class="form-label visually-hidden">
+          <label class="form-label visually-hidden">
             Проверить URL
-          </lable> 
+          </label> 
         </div>
         <div class="row align-bottom">
           <div class="col-md-auto">
