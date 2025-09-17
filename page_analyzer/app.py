@@ -79,7 +79,7 @@ def url_check(id):
         repo.check_url_save(data)
         flash("Страница успешно проверена", "success")
     else:
-        flash(f"Произошла ошибка при проверке", "danger")
+        flash("Произошла ошибка при проверке", "danger")
     
     return redirect(url_for('urls_show', id=id), code=302)
     
