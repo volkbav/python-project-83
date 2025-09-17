@@ -8,6 +8,7 @@ from .repository import UrlRepository
 from .validator import url_validate
 
 DATABASE_URL = os.getenv('DATABASE_URL')
+ERROR_CODE = 500
 
 load_dotenv()
 app = Flask(__name__)
@@ -75,7 +76,7 @@ def url_check(id):
     url = repo.find_by_id(id)['name']
     response = get_response(url)
 
-    if response['is_ok']:
+    if response['status_code'] < ERROR_CODE:
         data = {
             'url_id': id,
             'status_code': response['status_code'],
@@ -86,7 +87,8 @@ def url_check(id):
         repo.check_url_save(data)
         flash("Страница успешно проверена", "success")
     else:
-        flash("Произошла ошибка при проверке", "danger")
+        code = response['status_code']
+        flash(f"Произошла ошибка при проверке (код ошибки {code})", "danger")
     
     return redirect(url_for('urls_show', id=id), code=302)
     
