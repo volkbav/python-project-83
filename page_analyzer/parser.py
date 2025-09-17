@@ -6,7 +6,7 @@ ERROR_CODE = 500
 
 def parse_content(url, url_id):
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=1)
         response.raise_for_status()
     except requests.exceptions.RequestException:
         return {
