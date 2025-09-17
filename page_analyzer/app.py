@@ -12,7 +12,6 @@ ERROR_CODE = 500
 
 load_dotenv()
 app = Flask(__name__)
-app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 repo = UrlRepository(DATABASE_URL)
