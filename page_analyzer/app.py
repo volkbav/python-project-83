@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
 
-from .parser import get_response
+from .parser import parse_content
 from .repository import UrlRepository
 from .validator import url_validate
 
@@ -74,20 +74,13 @@ def urls_show(id):
 @app.route('/urls/<int:id>/checks', methods=['POST'])
 def url_check(id):
     url = repo.find_by_id(id)['name']
-    response = get_response(url)
+    data = parse_content(url, id)
 
-    if response['status_code'] < ERROR_CODE:
-        data = {
-            'url_id': id,
-            'status_code': response['status_code'],
-            'h1': None,
-            'title': None,
-            'description': None
-        }
+    if data['status_code'] < ERROR_CODE:
         repo.check_url_save(data)
         flash("Страница успешно проверена", "success")
     else:
-        code = response['status_code']
+        code = data['status_code']
         flash(f"Произошла ошибка при проверке (код ошибки {code})", "danger")
     
     return redirect(url_for('urls_show', id=id), code=302)
