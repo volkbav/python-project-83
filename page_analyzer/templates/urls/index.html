@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
-
   <div class="container-lg mt-3">
     <h1>
       Сайты
     </h1>
+    <!--формирование таблицы с проверенными сайтами-->
     <table class="table table-bordered" data-test="urls">
       <thead>
           <tr>
@@ -16,10 +16,12 @@
           </tr>  
       </thead>
       <tbody>
+        <!--цикл для формирования таблицы-->
         {% for url in urls %}
           <tr>
             <td>{{ url.id }}</td>
             <td><a href="{{ url_for('urls_show', id=url.id)}}">{{ url.name }}</a></td>
+            <!--тут используется условие, если нет данных, то вернёт пустое поле-->
             <td>{{ url.created_at.strftime("%Y-%m-%d") if url.created_at else '' }}</td>
             <td>{{ url.status_code }}</td>
           </tr>

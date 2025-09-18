@@ -8,7 +8,7 @@
   </head>
   <body>
     {% include 'header.html'%}
-    
+    <!--вывод flash-->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
@@ -18,7 +18,7 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
-
+    <!--вставка контента-->
     {% block content %}
     {% endblock %}
     {% include 'footer.html'%}

@@ -5,6 +5,7 @@
     <h1>
         Сайт: {{ url.name }}
     </h1>
+     <!--формирование таблицы сайта--> 
      <table class="table table-bordered" data-test="urls">
       <tbody>
           <tr>
@@ -24,36 +25,37 @@
     <h2 class="mt-5 mb-3">
         Проверки
     </h2>
+    <!--кнопка "запустить проверку"-->
     <form action="{{ url_for('url_check', id=url.id) }}" method="post">
       <input type="submit" class="btn btn-primary" value="Запустить проверку">
     </form>
-    
-  <div>
-    <table class="table table-bordered table-hover mt-2" data-test="checks">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Код ответа</th>
-          <th>h1</th>
-          <th>title</th>
-          <th>description</th>
-          <th>Дата создания</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for check in checks %}
-        <tr>
-          <td>{{ check.id }}</td>
-          <td>{{ check.status_code }}</td>
-          <td>{{ check.h1 }}</td>
-          <td>{{ check.title }}</td>
-          <td>{{ check.description }}</td>
-          <td>{{ check.created_at.strftime("%Y-%m-%d") if url.created_at else ''}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+    <!--формирование таблицы с проверками-->
+    <div>
+      <table class="table table-bordered table-hover mt-2" data-test="checks">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Код ответа</th>
+            <th>h1</th>
+            <th>title</th>
+            <th>description</th>
+            <th>Дата создания</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for check in checks %}
+          <tr>
+            <td>{{ check.id }}</td>
+            <td>{{ check.status_code }}</td>
+            <td>{{ check.h1 }}</td>
+            <td>{{ check.title }}</td>
+            <td>{{ check.description }}</td>
+            <td>{{ check.created_at.strftime("%Y-%m-%d") if url.created_at else ''}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 {% endblock %}
 </main>

@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
+  <!--вывод ошибок-->
   {% if errors.get('name') %}
     <div class="alert alert-danger" role="alert">
       {{ errors.name }}
     </div>
   {% endif %}
   <p></p>
+  <!--карточка с формой ввода адреса сайта-->
   <div class="card text-start mb-3 mx-auto p-2 bg-light" style="width: 30rem;">
     <div class="card-body">
       <h1 class="card-title">Анализатор страниц</h1>
       <p class="card-text">Бесплатно проверяйте сайты на SEO-пригодность</p>
+      <!--форма для ввода адреса сайта-->
       <form action="{{ url_for('urls_add') }}" method="POST" class="d-flex justify-content-left">
         <div class="col-auto">
           <label class="form-label visually-hidden">
@@ -19,9 +22,11 @@
         </div>
         <div class="row align-bottom">
           <div class="col-md-auto">
+            <!--само поле ввода-->
             <input class="form-control" type="text" name="url" value="{{ url.name }}" placeholder="http://www.example.com">
           </div>
           <div class="col-md-auto">
+            <!--кнопка "ПРОВЕРИТЬ"-->
             <input type="submit" class="btn btn-primary" value="ПРОВЕРИТЬ">
           </div>
         </div>
