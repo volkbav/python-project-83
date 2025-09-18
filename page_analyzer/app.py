@@ -8,17 +8,19 @@ from .repository import UrlRepository
 from .validator import url_validate
 
 load_dotenv()
-
+# читаем путь до БД (url) из .env
 DATABASE_URL = os.getenv('DATABASE_URL')
+# используется для условия сохранения результатов запроса
 ERROR_CODE = 500
 
-
+# подгружает данные из .env
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 repo = UrlRepository(DATABASE_URL)
 
 
+# Обработчит главной страницы
 @app.get("/") 
 def index():
     return render_template(
@@ -28,6 +30,7 @@ def index():
     )
 
 
+# Обработчик формы на главной странице
 @app.post("/urls")
 def urls_add():
     url = {
@@ -51,6 +54,7 @@ def urls_add():
     return redirect(url_for('urls_show', id=url_id), code=302) 
 
 
+# вывод проверенных сайтов (таблица)
 @app.get("/urls")
 def urls_index():
     urls = repo.get_all_urls()
@@ -61,6 +65,7 @@ def urls_index():
     )
 
 
+# вывод конкретного сайта
 @app.route("/urls/<int:id>")
 def urls_show(id):
     url = repo.find_by_id(id)
@@ -72,6 +77,7 @@ def urls_show(id):
     )
 
 
+# обработчик кнопки "запустить проверку"
 @app.route('/urls/<int:id>/checks', methods=['POST'])
 def url_check(id):
     url = repo.find_by_id(id)['name']
