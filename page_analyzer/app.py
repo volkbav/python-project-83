@@ -41,14 +41,14 @@ def urls_add():
             errors=errors,
         ), 422
     
-    flash_type = repo.save(url)
+    flash_type, url_id = repo.save(url)
     
     if flash_type == "success":
         flash("Страница успешно добавлена", "success")
     elif flash_type == "exist":
         flash("Страница уже существует", "primary")
    
-    return redirect(url_for('urls_show', id=url['id']), code=302) 
+    return redirect(url_for('urls_show', id=url_id), code=302) 
 
 
 @app.get("/urls")

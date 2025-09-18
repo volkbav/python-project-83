@@ -24,6 +24,7 @@ class UrlRepository:
                 id = cur.fetchone()[0]
                 url["id"] = id
             conn.commit()
+        return id
 
     def find_by_name(self, name):
         query = "SELECT * FROM urls WHERE name = %s"
@@ -68,8 +69,8 @@ class UrlRepository:
             url['id'] = exist_name['id']
             return "exist"
         else:
-            self._create(url)
-            return "success"
+            id = self._create(url)
+            return "success", id
 
     def check_url_save(self, data):
         
