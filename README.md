@@ -8,10 +8,22 @@ This is a learning project. Completed as part of the python developer course
 ## demo
 To view demo [click here](https://python-project-83-i5ma.onrender.com)
 
-## links
-[devlog](https://github.com/volkbav/python-project-83/blob/main/DEVLOG.md)
-[gunicorn doc](https://docs.gunicorn.org/en/latest/install.html)
-[uv intallation](https://docs.astral.sh/uv/getting-started/installation/#installation-methods)
+## Technology
+[gunicorn](https://docs.gunicorn.org/en/latest/index.html) - Python WSGI HTTP Server for UNIX
+
+[uv](https://github.com/astral-sh/uv) - Python package and project manager
+
+[Flask](https://flask.palletsprojects.com/en/stable/) - Lightweight WSGI web application framework
+
+[Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) -  Python library for pulling data out of HTML and XML files
+
+[library os](https://docs.python.org/3/library/os.html) - Miscellaneous operating system interfaces
+
+[library requests](https://requests.readthedocs.io/en/latest/) - Simple HTTP library for Python
+
+[library dotenv](https://pypi.org/project/python-dotenv/) - Reads key-value pairs from a .env file and can set them as environment variables
+
+[module urllib.parse](https://docs.python.org/3/library/urllib.parse.html) - Parse URLs into components
 
 # Installation
 For work you need make next step
