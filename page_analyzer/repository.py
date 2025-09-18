@@ -67,7 +67,7 @@ class UrlRepository:
 # тут из функции возвращаю тип flash
         if exist_name:
             url['id'] = exist_name['id']
-            return "exist"
+            return "exist", exist_name['id']
         else:
             id = self._create(url)
             return "success", id
