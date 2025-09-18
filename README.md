@@ -8,8 +8,8 @@ https://python-project-83-i5ma.onrender.com
 This is a learning project. Completed as part of the python developer course
 
 ## links
-|---|---|
-|Devlog|my todo list in this project|
+|-------|----------------------------|
+|Devlog |my todo list in this project|
 
 # Install
 For work you need make next step
