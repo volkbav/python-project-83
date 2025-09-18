@@ -10,6 +10,7 @@ class UrlRepository:
     def __init__(self, database_url=None):
         self.database_url = database_url or os.getenv('DATABASE_URL')
 
+    # добавление записи в таблицу url
     def _create(self, url):
         normilized_url = normilize_url(url['name'])
         query = """INSERT INTO urls (name, created_at) 
@@ -26,6 +27,7 @@ class UrlRepository:
             conn.commit()
         return id
 
+    # поиск в таблице url по имени
     def find_by_name(self, name):
         query = "SELECT * FROM urls WHERE name = %s"
 
@@ -35,6 +37,7 @@ class UrlRepository:
                 row = cur.fetchone()
                 return dict(row) if row else None
     
+    # поиск в табл. url по id
     def find_by_id(self, id):
         query = "SELECT * FROM urls WHERE id = %s"
 
@@ -43,7 +46,9 @@ class UrlRepository:
                 cur.execute(query, (id,))
                 row = cur.fetchone()
                 return dict(row) if row else None
-  
+    
+    # вывод данных из таблицы url и url_checks
+    # вывод в порядке убывания id
     def get_all_urls(self):
         query = """SELECT DISTINCT ON (u.id)
                 u.id,
@@ -61,10 +66,12 @@ class UrlRepository:
                 cur.execute(query)
                 return [dict(row) for row in cur]
 
+    # сохранение данных в таблицу url
     def save(self, url):
         normilized_url = normilize_url(url['name'])
         exist_name = self.find_by_name(normilized_url)
-# тут из функции возвращаю тип flash
+        
+        # тут из функции возвращаю тип flash
         if exist_name:
             url['id'] = exist_name['id']
             return "exist", exist_name['id']
@@ -72,8 +79,8 @@ class UrlRepository:
             id = self._create(url)
             return "success", id
 
+    # сохранение данных в таблицу url_checks
     def check_url_save(self, data):
-        
         query = """INSERT INTO  url_checks 
                     (url_id,
                     status_code,
@@ -98,6 +105,7 @@ class UrlRepository:
                 )
             conn.commit()
 
+    # вывод всех проверок для конкретного url
     def get_all_checks(self, url_id):
         query = """SELECT * FROM url_checks
             WHERE url_id=%s
