@@ -10,11 +10,27 @@ This is a learning project. Completed as part of the python developer course
 # Install
 For work you need make next step
 ## 1. Install Python
-### macOs
+macOs
 ```
 brew install python3
 ```
-### linux (ubuntu)
+linux (ubuntu)
 ```
 sudo apt install python3
+```
+## 2. Install uv
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+If you did not have `curl`:
+```
+wget -qO- https://astral.sh/uv/install.sh | sh
+```
+macOs
+```
+brew install uv
+```
+linux (ubuntu)
+```sh
+brew install uv
 ```
