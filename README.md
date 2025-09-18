@@ -7,6 +7,10 @@ https://python-project-83-i5ma.onrender.com
 # About project
 This is a learning project. Completed as part of the python developer course
 
+## links
+|---|---|
+|Devlog|my todo list in this project|
+
 # Install
 For work you need make next step
 ## 1. Install Python
@@ -31,6 +35,14 @@ macOs
 brew install uv
 ```
 linux (ubuntu)
-```sh
+```
 brew install uv
+```
+## 3. Clone repository
+```
+git clone https://github.com/volkbav/python-project-83.git
+```
+## 4. Install programm
+```
+make install
 ```
