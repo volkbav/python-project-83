@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-TIMEOUT = 504
+TIMEOUT_CODE = 504
 
 
 # парсер запроса
@@ -13,7 +13,7 @@ def parse_content(url, url_id):
     except requests.exceptions.RequestException:
         return {
             'url_id': url_id,
-            'status_code': TIMEOUT,
+            'status_code': TIMEOUT_CODE,
             'h1': None,
             'title': None,
             'description': None
