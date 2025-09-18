@@ -17,7 +17,7 @@ def url_validate(url):
     elif len(url) > 255:
         return {'name': 'URL слишком длинный'}
     
-    if not parsed_url.scheme or not parsed_url.netloc:
+    if not parsed_url.scheme not in ("http", "https") or not parsed_url.netloc:
         return {'name': 'Некорректный URL'}
     
     return {}
