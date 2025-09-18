@@ -8,7 +8,7 @@ This is a learning project. Completed as part of the python developer course
 ## demo
 To view demo [click here](https://python-project-83-i5ma.onrender.com)
 
-## Technology
+## Technologies Used
 [gunicorn](https://docs.gunicorn.org/en/latest/index.html) - Python WSGI HTTP Server for UNIX
 
 [uv](https://github.com/astral-sh/uv) - Python package and project manager
