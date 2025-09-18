@@ -26,7 +26,7 @@ def index():
     )
 
 
-@app.post("/")
+@app.post("/urls")
 def urls_add():
     url = {
         'name': request.form.get("url", "")
@@ -49,7 +49,7 @@ def urls_add():
     return redirect(url_for('urls_index'), code=302) 
 
 
-@app.route("/urls")
+@app.get("/urls")
 def urls_index():
     urls = repo.get_all_urls()
 
