@@ -1,6 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/volkbav/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/volkbav/python-project-83/actions) [![Test page analizer](https://github.com/volkbav/python-project-83/actions/workflows/my_tests.yml/badge.svg)](https://github.com/volkbav/python-project-83/actions/workflows/my_tests.yml)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=volkbav_python-project-83&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=volkbav_python-project-83)
 
 # About project
 This is a learning project. Completed as part of the python developer course

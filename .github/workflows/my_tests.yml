@@ -19,4 +19,13 @@ jobs:
       - name: Run linter and pytest
         run: |
           make lint
+      - name: SonarQubeScan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=volkbav_python-project-83
+            -Dsonar.organization=volkbav
+            -Dsonar.python.coverage.reportPaths=coverage.xml
 
