@@ -10,7 +10,11 @@ This is a learning project. Completed as part of the python developer course
 ## links
 [devlog](https://github.com/volkbav/python-project-83/blob/main/DEVLOG.md)
 
-# Install
+[gunicorn doc](https://docs.gunicorn.org/en/latest/install.html)
+
+[uv intallation](https://docs.astral.sh/uv/getting-started/installation/#installation-methods)
+
+# Installation
 For work you need make next step
 ## 1. Install Python
 macOs
