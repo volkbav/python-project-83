@@ -48,7 +48,7 @@ def urls_add():
     elif flash_type == "exist":
         flash("Страница уже существует", "primary")
    
-    return redirect(url_for('urls_index'), code=302) 
+    return redirect(url_for('urls_show', id=url['id']), code=302) 
 
 
 @app.get("/urls")

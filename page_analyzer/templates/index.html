@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
-  {% if errors['name'] %}
+  {% if errors.get('name') %}
     <div class="alert alert-danger" role="alert">
       {{ errors.name }}
     </div>
