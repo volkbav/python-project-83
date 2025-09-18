@@ -7,10 +7,12 @@ from .parser import parse_content
 from .repository import UrlRepository
 from .validator import url_validate
 
+load_dotenv()
+
 DATABASE_URL = os.getenv('DATABASE_URL')
 ERROR_CODE = 500
 
-load_dotenv()
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 

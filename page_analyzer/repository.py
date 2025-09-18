@@ -1,3 +1,4 @@
+import os
 import psycopg2
 from psycopg2.extras import DictCursor
 
@@ -5,8 +6,8 @@ from .validator import normilize_url
 
 
 class UrlRepository:
-    def __init__(self, database_url):
-        self.database_url = database_url
+    def __init__(self, database_url=None):
+        self.database_url = database_url or os.getenv('DATABASE_URL')
 
     def _create(self, url):
         normilized_url = normilize_url(url['name'])
