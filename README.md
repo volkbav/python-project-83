@@ -48,3 +48,9 @@ git clone https://github.com/volkbav/python-project-83.git
 ```
 make install
 ```
+# Run project
+```
+make start
+```
+To view web interface go to adress in brouser
+[http://127.0.0.1:8000/](http://127.0.0.1:8000/)
